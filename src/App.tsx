@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import FleetManagement from "./pages/owner/fleetManagement";
+import BookingManagement from "./pages/owner/bookingManagement";
+import Sidebar from "./components/sidebar";
+import { CssBaseline } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-function App() {
+const theme = createTheme({
+  typography: {
+    fontFamily: "'Figtree', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+  },
+});
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <div style={{ display: "flex" }}>
+          <Sidebar />
+          <main style={{ flexGrow: 1, padding: "20px" }}>
+            <Routes>
+              <Route path="/" element={<Navigate to="/fleet" />} />
+              <Route path="/fleet" element={<FleetManagement />} />
+              <Route path="/bookings" element={<BookingManagement />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
-
-export default App;
