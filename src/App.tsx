@@ -4,6 +4,7 @@ import BookingManagement from "./pages/owner/bookingManagement";
 import Sidebar from "./components/sidebar";
 import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Login from "./pages/login";
 
 const theme = createTheme({
   typography: {
@@ -16,16 +17,12 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <div style={{ display: "flex" }}>
-          <Sidebar />
-          <main style={{ flexGrow: 1, padding: "20px" }}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/fleet" />} />
-              <Route path="/fleet" element={<FleetManagement />} />
-              <Route path="/bookings" element={<BookingManagement />} />
-            </Routes>
-          </main>
-        </div>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/fleet" element={<FleetManagement />} />
+          <Route path="/bookings" element={<BookingManagement />} />
+        </Routes>
       </Router>
     </ThemeProvider>
   );
